@@ -1,47 +1,31 @@
 CHAR . CONSTANT DOT
 CHAR * CONSTANT STAR
 
-\ say if i = 0 or m-1
-: IS-BORDER? ( m,i -- f )
-    DUP 0= -ROT 1+ = OR ;
+\ true if 0 < i < m-1
+: INSIDE? ( m,i -- f )
+    SWAP 1- OVER - * ;
 
-\ return a star if i is 0 or m-1 else a dot 
-: DOT-OR-CHAR ( m,i -- c )
-    IS-BORDER? IF STAR ELSE DOT THEN ;
+\ print a star if i is 0 or m-1 else a dot 
+: .DOT-OR-CHAR ( m,i -- c )
+    INSIDE? IF DOT ELSE STAR THEN EMIT ;
     
-\ print a star or a dot 
-: .DOT-OR-CHAR ( m,i -- )
-    DOT-OR-CHAR EMIT ;
-
 \ print a row of n dots with star at the border
-: .NORMAL-ROW  ( n -- )
-    DUP
-    0 DO
-        DUP I .DOT-OR-CHAR 
-    LOOP 
-    DROP CR ;
+: .DOTS  ( n -- )
+    0 DO 2R@ .DOT-OR-CHAR LOOP CR ;
 
 \ print a row of stars
-: .BORDER-ROW ( m -- ) 
+: .STARS ( m -- ) 
     0 DO STAR EMIT LOOP CR ;        
 
 \ print a border row of size m, stars if i = 0 or n-1
 : .ROW ( m,n,i -- )
-    IS-BORDER? IF    \ m
-        .BORDER-ROW 
-    ELSE 
-        .NORMAL-ROW 
-    THEN ;
+    INSIDE? IF .DOTS ELSE .STARS THEN ;
     
 \ print n rows of dots with a border of stars
 : .ROWS ( n,m -- )
     SWAP            \ m,n        outer loop max on top 
-    DUP             \ m,n,n      keep n for loop work
-    0 DO            \ m,n
-        OVER OVER   \ m,n,m,n  
-        I .ROW
-    LOOP 
-    DROP DROP CR ;  
+    0 DO DUP 2R@ .ROW LOOP 
+    DROP CR ;  
 
 \ true if the given char is between '0' and '9'
 : IS-DIGIT? ( c -- f )
@@ -75,4 +59,4 @@ CHAR * CONSTANT STAR
         .ROWS
     LOOP ;
 
-MAIN BYE
+\ MAIN BYE

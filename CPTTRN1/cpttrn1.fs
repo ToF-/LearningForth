@@ -26,8 +26,20 @@ CHAR * CONSTANT STAR
     LOOP 
     DROP CR ;
 
+: IS-DIGIT? ( c -- f )
+    DUP  [CHAR] 0 >=
+    SWAP [CHAR] 9 <= AND ;
+
+: SKIP-NON-DIGIT ( -- c )
+    BEGIN
+        KEY DUP IS-DIGIT? 0= WHILE
+        DROP
+    REPEAT ;
+
+
 3 1 .ROWS
 4 4 .ROWS
 2 5 .ROWS
 
-BYE
+SKIP-NON-DIGIT
+EMIT CR BYE

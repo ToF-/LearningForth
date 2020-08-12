@@ -36,10 +36,20 @@ CHAR * CONSTANT STAR
         DROP
     REPEAT ;
 
+: GET-NUMBER ( -- n )
+    SKIP-NON-DIGIT  \ c
+    0 SWAP          \ a,c     put the accumulator
+    BEGIN
+        [CHAR] 0 -  \ a,d     digit value
+        SWAP 10 * + \ a       accumulate
+        KEY         \ a,c
+        DUP IS-DIGIT?  \ a,c,f
+    0= UNTIL DROP ;
+
+        
 
 3 1 .ROWS
 4 4 .ROWS
 2 5 .ROWS
 
-SKIP-NON-DIGIT
-EMIT CR BYE
+GET-NUMBER . CR BYE

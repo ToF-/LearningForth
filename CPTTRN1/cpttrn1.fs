@@ -26,16 +26,19 @@ CHAR * CONSTANT STAR
     LOOP 
     DROP CR ;
 
+\ true if the given char is between '0' and '9'
 : IS-DIGIT? ( c -- f )
     DUP  [CHAR] 0 >=
     SWAP [CHAR] 9 <= AND ;
 
+\ read input until first digit char, return it
 : SKIP-NON-DIGIT ( -- c )
     BEGIN
         KEY DUP IS-DIGIT? 0= WHILE
         DROP
     REPEAT ;
 
+\ read input until a number is read, return it
 : GET-NUMBER ( -- n )
     SKIP-NON-DIGIT  \ c
     0 SWAP          \ a,c     put the accumulator
@@ -46,8 +49,7 @@ CHAR * CONSTANT STAR
         DUP IS-DIGIT?  \ a,c,f
     0= UNTIL DROP ;
 
-        
-
+\ read the numbers, print the patterns
 : MAIN
     GET-NUMBER
     0 DO

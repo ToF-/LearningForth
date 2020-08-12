@@ -48,8 +48,12 @@ CHAR * CONSTANT STAR
 
         
 
-3 1 .ROWS
-4 4 .ROWS
-2 5 .ROWS
+: MAIN
+    GET-NUMBER
+    0 DO
+        GET-NUMBER
+        GET-NUMBER
+        .ROWS
+    LOOP ;
 
-GET-NUMBER . CR BYE
+MAIN BYE

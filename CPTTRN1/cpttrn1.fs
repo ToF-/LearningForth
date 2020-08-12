@@ -5,8 +5,12 @@ CHAR * CONSTANT STAR
 : DOT-OR-CHAR ( n -- c )
     1 AND IF DOT ELSE CHAR THEN ;
     
-0 DOT-OR-CHAR EMIT CR
-1 DOT-OR-CHAR EMIT CR
-0 DOT-OR-CHAR EMIT CR
+\ print the character depending on n
+: .DOT-OR-CHAR ( n -- )
+    DOT-OR-CHAR EMIT ;
+
+0 .DOT-OR-CHAR CR
+1 .DOT-OR-CHAR CR
+2 .DOT-OR-CHAR CR
 
 BYE

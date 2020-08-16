@@ -1,40 +1,49 @@
 VARIABLE SIZE
 
-: REL-COORD ( n -- n%s )
+: RELATIVE ( n -- n%s )
     SIZE @ MOD ;
 
-: OPP-COORD ( n -- s-n%s )
-    SIZE @ 1- SWAP REL-COORD - ;
+: OPPOSITE ( n -- s-n%s )
+    SIZE @ 1- SWAP RELATIVE - ;
 
 : UP? ( row,col -- flag )
     SIZE @ TUCK / 2 MOD -ROT / 2 MOD = ;
 
-: AREA ( row,col -- flag )
-    OVER OVER UP? IF 
-        OVER SIZE @ / 1 AND 0= IF
-            REL-COORD SWAP OPP-COORD >
-        ELSE REL-COORD SWAP OPP-COORD <
-        THEN
-    ELSE 
-        OVER SIZE @ / 1 AND IF
-            REL-COORD SWAP REL-COORD  > 
-        ELSE REL-COORD SWAP REL-COORD <
-        THEN
-    THEN 
-    IF [CHAR] * ELSE [CHAR] . THEN ;
+: NORTH-WEST ( row,col -- n )
+    RELATIVE SWAP OPPOSITE - ;
 
-: DIAGONAL? ( row,col -- char,flag )
-    OVER OVER UP?
-    IF   REL-COORD SWAP OPP-COORD = [CHAR] /
-    ELSE REL-COORD SWAP REL-COORD = [CHAR] \
-    THEN SWAP ;
-    
+: NORTH-EAST ( row,col -- n )
+    OPPOSITE SWAP OPPOSITE - ;
+
+: SOUTH-WEST ( row,col -- n )
+    RELATIVE SWAP RELATIVE - ;
+
+: SOUTH-EAST ( row,col -- n )
+    OPPOSITE SWAP RELATIVE - ;
+
+CREATE ZONES ' NORTH-WEST , ' NORTH-EAST , ' SOUTH-WEST , ' SOUTH-EAST ,
+47 CONSTANT SLASH 
+92 CONSTANT BACKSLASH
+CREATE DIAGS SLASH C, BACKSLASH C, BACKSLASH C, SLASH C,
+
+: WHICH-ZONE ( row,col -- NW|NE|SW|SE )
+    SIZE @ / 1 AND SWAP 
+    SIZE @ / 1 AND 2* OR ; 
+
+: PATTERN-VALUE ( row,col -- value)
+    OVER OVER WHICH-ZONE
+    CELLS ZONES + @ EXECUTE ;
+
+: DIAGONAL ( row,col -- char )
+    WHICH-ZONE 
+    DIAGS + C@ ;
+
+: AREA ( v -- char )
+    0> IF [CHAR] * ELSE [CHAR] . THEN ;
+
 : PATTERN ( row,col -- char )
-    OVER OVER DIAGONAL? IF 
-        ROT DROP NIP
-    ELSE
-        DROP AREA 
-    THEN ;
+    OVER OVER PATTERN-VALUE 
+    ?DUP 0= IF DIAGONAL ELSE -ROT DROP DROP AREA THEN ;
 
 : .ROW ( row,limit -- )
     0 DO DUP I PATTERN EMIT LOOP DROP ;
@@ -61,6 +70,9 @@ VARIABLE SIZE
         TO-DIGIT SWAP 10 * + 
         KEY DUP IS-DIGIT? 
     0= UNTIL DROP ;
+
+: .VALUES ( #rows,#cols -- )
+    SWAP 0 DO DUP 0 DO J I DIAGONAL 4 .R LOOP CR CR LOOP ; 
 
 : MAIN
     GET-NUMBER 0 DO

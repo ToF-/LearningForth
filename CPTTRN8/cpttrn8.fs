@@ -6,9 +6,6 @@ VARIABLE SIZE
 : OPPOSITE ( n -- s-n%s )
     SIZE @ 1- SWAP RELATIVE - ;
 
-: UP? ( row,col -- flag )
-    SIZE @ TUCK / 2 MOD -ROT / 2 MOD = ;
-
 : NORTH-WEST ( row,col -- n )
     RELATIVE SWAP OPPOSITE - ;
 

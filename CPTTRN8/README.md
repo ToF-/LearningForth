@@ -71,7 +71,7 @@ Determining what character to print at any point (*row*,*col*) is a matter of fi
        6 22223333
        7 22223333
 
-The point (*row*,*col*) being outside, on the diagonal, or inside the diamond is determined by the relationship between row and col, depending on the zone:
+The point (*row*,*col*) being outside, on the diagonal, or inside the diamond is determined by the relationship between *row* and *col*, depending on the zone:
 
 - *NW* : *(col % size) - (size - ((row % size) + 1)*
 - *NE* : *(size - ((col % size) + 1)) - (size - ((row % size) + 1))*

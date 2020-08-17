@@ -104,3 +104,21 @@ Thus for each point (*row*,*col*):
 - if the point is on a diagonal, compute the diagonal direction
 - print the point
 
+Since each zone requires a different word to compute the pattern value, create a table which will be indexed by the zone value and in which the execution address of each word is stored.
+
+    CREATE ZONES ' NORTH-WEST , ' NORTH-EAST , ' SOUTH-WEST , ' SOUTH-EAST ,
+
+Executing the address stored at the zone determined by *row* and *col* computes the value for the zone.
+
+    : PATTERN-VALUE ( row,col -- value)
+        OVER OVER ZONE
+        CELLS ZONES + @ EXECUTE ;
+
+The diagonal character is computed the same way.
+
+    CREATE DIAGS       SLASH C,   BACKSLASH C,   BACKSLASH C,       SLASH C,
+    
+    : DIAGONAL ( row,col -- char )
+        ZONE DIAGS + C@ ;
+
+

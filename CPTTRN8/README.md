@@ -114,7 +114,7 @@ Executing the address stored at the zone determined by *row* and *col* computes 
         OVER OVER ZONE
         CELLS ZONES + @ EXECUTE ;
 
-The diagonal character is computed the same way.
+The diagonal character is also found using a table.
 
     CREATE DIAGS       SLASH C,   BACKSLASH C,   BACKSLASH C,       SLASH C,
     

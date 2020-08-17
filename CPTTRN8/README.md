@@ -58,7 +58,7 @@ Important parameter: the *size* of the diamond. Here's a diamond of size 4:
        6 ..\**/..
        7 ...\/...
 
-Determining what character to print at any point (*row*,*col*) is a matter of finding in which zone (*NW*,*NE*,*SW*,*SE*) of an invidual diamond the point is located: *(row/size)%2 + (col/size)%2*.
+Determining what character to print at any point (*row*,*col*) is a matter of finding in which zone (*NW*,*NE*,*SW*,*SE*) of an invidual diamond the point is located: *((row / size) % 2) * 2) + ((col / size) % 2)*.
 
          01234567
     

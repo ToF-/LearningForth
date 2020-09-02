@@ -21,4 +21,11 @@ T{ ." _EMIT emits a char to the output stream unless redirected " CR
     S" !$#" TEMP TEMP-LENGTH @ COMPARE 0 ?S
 }T
 
+T{ ." .ROW displays a row of alternate dots and stars " CR
+    ' >TEMP IS _EMIT
+    TEMP-LENGTH OFF
+    0 4 .ROW 
+    S" *.*." TEMP TEMP-LENGTH @ COMPARE 0 ?S
+ }T
+
 BYE

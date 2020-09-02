@@ -36,4 +36,14 @@ T{ ." _CR emits a new line to the output stream unless redirected " CR
     TEMP-LENGTH OFF
     _CR TEMP C@ 13 ?S
 }T
+
+T{ ." .ROWS emits several rows of alternate dots and stars " CR
+    TEMP 10000 ERASE
+    TEMP-LENGTH OFF
+    ' >TEMP IS _EMIT
+    ' NOOP IS _CR
+    4 4 .ROWS
+    S" *.*..*.**.*..*.*" TEMP TEMP-LENGTH @ COMPARE 0 ?S
+
+}T
 BYE

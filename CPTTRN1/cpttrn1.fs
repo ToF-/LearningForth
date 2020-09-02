@@ -7,3 +7,6 @@ DEFER _EMIT  ' EMIT IS _EMIT
     0 DO DUP STARDOT _EMIT 1+ LOOP DROP ;
 
 DEFER _CR   ' CR IS _CR
+
+: .ROWS ( cols,rows -- )
+    0 DO I OVER .ROW _CR LOOP DROP ;

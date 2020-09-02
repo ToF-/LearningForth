@@ -28,4 +28,12 @@ T{ ." .ROW displays a row of alternate dots and stars " CR
     S" *.*." TEMP TEMP-LENGTH @ COMPARE 0 ?S
  }T
 
+T{ ." _CR emits a new line to the output stream unless redirected " CR
+    : TEMP-CR 13 _EMIT ;
+    
+    ' TEMP-CR IS _CR
+    0 TEMP C!
+    TEMP-LENGTH OFF
+    _CR TEMP C@ 13 ?S
+}T
 BYE

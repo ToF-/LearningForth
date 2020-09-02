@@ -74,4 +74,10 @@ T{ ." GET-NUMBER reads a number from the input stream " CR
     GET-NUMBER 4807 ?S
 }T
 
+T{ ." MAIN reads a number of cases and prints them " CR
+    S" 1 2 5" INPUT-LENGTH ! TEMP-INPUT ! TEMP-INDEX OFF
+    TEMP 10000 ERASE OUTPUT-LENGTH OFF
+    MAIN
+    S" *.*.*.*.*." TEMP OUTPUT-LENGTH @ COMPARE 0 ?S
+}T
 BYE

@@ -27,3 +27,7 @@ DEFER _KEY  ' KEY IS _KEY
         [CHAR] 0 - SWAP 10 * +
         _KEY
     REPEAT DROP ;
+
+: MAIN 
+    GET-NUMBER
+    0 DO  GET-NUMBER GET-NUMBER SWAP .ROWS _CR LOOP ;

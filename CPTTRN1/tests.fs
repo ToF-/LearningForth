@@ -67,4 +67,9 @@ T{ ." SKIP-NON-DIGITS reads chars from the input stream until a digit it read " 
     S"    42" TEMP-LENGTH ! TEMP-INPUT ! TEMP-INDEX OFF
     SKIP-NON-DIGITS CHAR 4 ?S
 }T
+
+T{ ." GET-NUMBER reads a number from the input stream " CR 
+    S" 4807" TEMP-LENGTH ! TEMP-INPUT ! TEMP-INDEX OFF
+    GET-NUMBER 4807 ?S
+}T
 BYE

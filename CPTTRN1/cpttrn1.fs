@@ -18,3 +18,12 @@ DEFER _KEY  ' KEY IS _KEY
 
 : SKIP-NON-DIGITS ( -- char ) 
     BEGIN _KEY DUP IS-DIGIT? 0= WHILE DROP REPEAT ;
+
+: GET-NUMBER ( -- n )
+    SKIP-NON-DIGITS
+    0 SWAP
+    BEGIN
+        DUP IS-DIGIT? WHILE
+        [CHAR] 0 - SWAP 10 * +
+        _KEY
+    REPEAT DROP ;

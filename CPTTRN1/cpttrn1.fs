@@ -12,3 +12,9 @@ DEFER _CR   ' CR IS _CR
     0 DO I OVER .ROW _CR LOOP DROP ;
 
 DEFER _KEY  ' KEY IS _KEY
+
+: IS-DIGIT? ( char -- flag )
+    DUP [CHAR] 0 >= SWAP [CHAR] 9 <= AND ;
+
+: SKIP-NON-DIGITS ( -- char ) 
+    BEGIN _KEY DUP IS-DIGIT? 0= WHILE DROP REPEAT ;

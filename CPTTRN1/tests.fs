@@ -57,7 +57,14 @@ T{ ." _KEY reads a char from the input stream unless redirected " CR
             4 
         THEN ;
 
-    S" 42" TEMP-LENGTH ! TEMP-INPUT !
-    _KEY [CHAR] 4 ?S _KEY [CHAR] 2 ?S
+    ' <TEMP IS _KEY
+    S" 42" TEMP-LENGTH ! TEMP-INPUT ! TEMP-INDEX OFF
+    _KEY CHAR 4 ?S _KEY CHAR 2 ?S
+}T
+
+T{ ." SKIP-NON-DIGITS reads chars from the input stream until a digit it read " CR
+
+    S"    42" TEMP-LENGTH ! TEMP-INPUT ! TEMP-INDEX OFF
+    SKIP-NON-DIGITS CHAR 4 ?S
 }T
 BYE

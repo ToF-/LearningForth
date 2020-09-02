@@ -8,7 +8,7 @@ unit : cpttrn1.fs tests.fs
 	gforth-itc tests.fs
 
 spoj : cpttrn1.fs
-	echo "main bye" >main.fs
+	echo "MAIN BYE" >main.fs
 	cat cpttrn1.fs main.fs >spoj.fs
 	
 clean : 

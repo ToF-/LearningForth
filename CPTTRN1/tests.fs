@@ -44,6 +44,20 @@ T{ ." .ROWS emits several rows of alternate dots and stars " CR
     ' NOOP IS _CR
     4 4 .ROWS
     S" *.*..*.**.*..*.*" TEMP TEMP-LENGTH @ COMPARE 0 ?S
+}T
 
+T{ ." _KEY reads a char from the input stream unless redirected " CR
+    VARIABLE TEMP-INPUT
+    VARIABLE TEMP-INDEX
+    : <TEMP ( -- char )
+        TEMP-INDEX @ TEMP-LENGTH @ < IF
+            TEMP-INPUT @ TEMP-INDEX @ + C@ 
+            1 TEMP-INDEX +! 
+        ELSE
+            4 
+        THEN ;
+
+    S" 42" TEMP-LENGTH ! TEMP-INPUT !
+    _KEY [CHAR] 4 ?S _KEY [CHAR] 2 ?S
 }T
 BYE

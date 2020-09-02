@@ -10,3 +10,5 @@ DEFER _CR   ' CR IS _CR
 
 : .ROWS ( cols,rows -- )
     0 DO I OVER .ROW _CR LOOP DROP ;
+
+DEFER _KEY  ' KEY IS _KEY

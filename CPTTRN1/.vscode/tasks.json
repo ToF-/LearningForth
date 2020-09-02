@@ -8,10 +8,7 @@
             "type": "shell",
             "command": "make test",
             "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         },
         {
             "label": "unit",

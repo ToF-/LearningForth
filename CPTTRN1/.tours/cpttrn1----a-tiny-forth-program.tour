@@ -1,0 +1,97 @@
+{
+  "title": "CPTTRN1 -- a tiny forth program",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "You are given t < 100 - the number of test cases and for each of the test cases two positive integers: l - the number of lines and c - the number of columns in the pattern (l, c < 100).\n\nUsing two characters: . (dot) and * (asterisk) print a chessboard-like pattern. The first character printed should be * (asterisk).\n"
+    },
+    {
+      "title": "Examples",
+      "description": "###Input:\n```\n3\n3 1\n4 4\n2 5\n```\n\n###Output:\n````\n*\n.\n*\n\n*.*.\n.*.*\n*.*.\n.*.*\n\n*.*.*\n.*.*.\n```\n"
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 47,
+          "character": 1
+        },
+        "end": {
+          "line": 51,
+          "character": 11
+        }
+      },
+      "description": "the main word reads the number of cases on the input stream, and for each case reads the number of rows, the number of cols, and prints the pattern."
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 23,
+          "character": 1
+        },
+        "end": {
+          "line": 25,
+          "character": 14
+        }
+      },
+      "description": "proceed to do *#rows* loops, each time putting the row index and *#cols* on the stack and printing a row."
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 19,
+          "character": 1
+        },
+        "end": {
+          "line": 21,
+          "character": 1
+        }
+      },
+      "description": "printing a row is looping *n* times, each time printing a star or a dot, and adding 1 to a counter."
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 16,
+          "character": 1
+        },
+        "end": {
+          "line": 17,
+          "character": 43
+        }
+      },
+      "description": "if the counter is odd, we want the character for dot on the stack, if it's even, we want the star."
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 4,
+          "character": 1
+        },
+        "end": {
+          "line": 8,
+          "character": 16
+        }
+      },
+      "description": "`OUTPUT` is a deferred word (more on this later). Here we want `OUTPUT` to execute `EMIT` which is the standard word to write a char on the output stream."
+    },
+    {
+      "file": "cpttrn1.fs",
+      "selection": {
+        "start": {
+          "line": 10,
+          "character": 1
+        },
+        "end": {
+          "line": 14,
+          "character": 15
+        }
+      },
+      "description": "`INPUT` is also a deferred word. We want `INPUT` to execute `KEY`, the standard word to read a character on the input stream."
+    }
+  ]
+}
